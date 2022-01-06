@@ -1,16 +1,36 @@
-import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./addemp.css";
-import data from "./us_data.json";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function Employee() {
   console.log("successfull ");
 
-  const [contacts] = useState(data);
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    const getData = async () =>
+      await fetch("employee/employee-detail/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-origin": "*",
+          credentials: "same-origin",
+        },
+      });
+    getData()
+      .then((res) => res.json())
+      .then((data) => data.data)
+      .then((data) => setContacts(data))
+      .catch((err) => console.log("err: ", err.message));
+  }, []);
 
   return (
     <div classname="app-container">
-        <button onClick="addForm">Add</button>
+      {console.log(contacts)}
+      <Button component={Link} to="/addForm">
+        Add
+      </Button>
       <table class="table table-hover table-dark">
         <thead>
           <th>Name</th>
@@ -21,15 +41,16 @@ export default function Employee() {
           <th>Password</th>
         </thead>
         <tbody>
-          {contacts.map((contact) => (
-            <tr>
+          {contacts.map((contact, idx) => (
+            <tr key={idx}>
               <td>
-                {contact.First_Name} {contact.Last_Name}</td>
-              <td>{contact.PhoneNumber}</td>
-              <td>{contact.Email}</td>
-              <td>{contact.Salary}</td>
-              <td>{contact.User_Name}</td>
-              <td>{contact.Password}</td>
+                {contact.first_name} {contact.last_name}
+              </td>
+              <td>{contact.phone_number}</td>
+              <td>{contact.email}</td>
+              <td>{contact.salary}</td>
+              <td>{contact.user_name}</td>
+              <td>{contact.password}</td>
             </tr>
           ))}
         </tbody>

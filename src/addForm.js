@@ -1,5 +1,4 @@
 import React from "react";
-import DjangoCSRFToken from 'django-react-csrftoken'
 
 class AddForm extends React.Component {
   constructor(props) {
@@ -18,28 +17,21 @@ class AddForm extends React.Component {
     this.saveClickHandler = this.saveClickHandler.bind(this);
   }
 
-
-  saveClickHandler(val) {
-    this.setState(val);
-    console.log(val);
-    const ret = async () => await fetch("employee/input-employee-detail/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-origin":"*",
-        credentials: "same-origin"
-      },
-      body: JSON.stringify(this.state),
-    })
-    ret().then(res => console.log(res)).catch(err => console.log(err.message))
-
-      // .then((response) => response.json())
-      // .then((data) => {
-      //   console.log("Success:", data);
-      // })
-      // .catch((error) => {
-      //   console.error("Error:", error);
-      // });
+  saveClickHandler(e, val) {
+    const ret = async () =>
+      await fetch("employee/employee-detail/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-origin": "*",
+          credentials: "same-origin",
+        },
+        body: JSON.stringify(val),
+      });
+    ret()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err.message));
+    e.preventDefault();
   }
 
   handleChange(propertyName, event) {
@@ -52,7 +44,6 @@ class AddForm extends React.Component {
     return (
       <div>
         <form>
-            {/* <DjangoCSRFToken /> */}
           <div className="form-group">
             <label>First Name</label>
             <input
@@ -119,7 +110,7 @@ class AddForm extends React.Component {
           <button
             type="button"
             className="btn btn-default"
-            onClick={() => this.saveClickHandler(this.state.form)}
+            onClick={(e) => this.saveClickHandler(e, this.state.form)}
           >
             Add to database
           </button>

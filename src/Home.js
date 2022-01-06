@@ -6,7 +6,6 @@ import { Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 
-
 export default function Home() {
   return (
     <>
@@ -23,14 +22,12 @@ export default function Home() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ms-auto">
-                
-                  <Nav.Link href="/">Home</Nav.Link>
-                  <Nav.Link href="/dashboard/Dashboard">Dashboard</Nav.Link>
-                  <Nav.Link href="/emp">Employee</Nav.Link>
-                  <Nav.Link href="/signup">Sign Up</Nav.Link>
-                  <Nav.Link href="/signin">Sign In</Nav.Link>
-                  <Nav.Link href="/addForm">Add Form</Nav.Link>
-                
+                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/dashboard/Dashboard">Dashboard</Nav.Link>
+                <Nav.Link href="/emp">Employee</Nav.Link>
+                <Nav.Link href="/signup">Sign Up</Nav.Link>
+                <Nav.Link href="/signin">Sign In</Nav.Link>
+                <Nav.Link href="/addForm">Add Form</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -38,11 +35,13 @@ export default function Home() {
       </div>
       <div>
         <h2>Employee Management System</h2>
-        <p>Onpay is simply an application that helps companies with numerous or few number of employees to store and manage their database. 
-         We just call ourselves as a helping hand to the companies that have a great future ahead.  
+        <p>
+          Onpay is simply an application that helps companies with numerous or
+          few number of employees to store and manage their database. We just
+          call ourselves as a helping hand to the companies that have a great
+          future ahead.
         </p>
         <p2>Welcome to creating your own database.</p2>
-
       </div>
     </>
   );
